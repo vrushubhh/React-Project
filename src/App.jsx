@@ -1,21 +1,53 @@
-import AppName from "./components/AppName";
-import AddTodo from "./components/AddTodo";
-import TodoItem1 from "./components/TodoItem1";
-import TodoItem2 from "./components/TodoItem2";
-// import "./App.css";
-import "./App.css";
+import React, { useState } from 'react';
 
-function App() {
+function LoginForm() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('vrushabh');
+  const [password, setPassword] = useState('anna');
+
+  const handleLogin = () => {
+    
+    if (username === 'user' && password === 'password') {
+      setIsLoggedIn(true);
+    } else {
+      alert('Invalid username or password');
+    }
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUsername('vrushabh');
+    setPassword('anna');
+  };
+
   return (
-    <center className="todo-container">
-      <AppName />
-      <AddTodo />
-      <div className="items-container">
-        <TodoItem1></TodoItem1>
-        <TodoItem2></TodoItem2>
-      </div>
-    </center>
+    <div>
+      {isLoggedIn ? (
+        <div>
+          <h2>Welcome, {username}!</h2>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <div>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <br />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      )}
+    </div>
   );
 }
 
-export default App;
+export default LoginForm;
